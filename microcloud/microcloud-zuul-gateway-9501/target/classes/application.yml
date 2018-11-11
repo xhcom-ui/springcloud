@@ -1,0 +1,50 @@
+server:
+  port: 9501
+
+#指定应用设置路由
+zuul:
+#表示AuthorizedRequestFilter 将被禁止使用true  启用使用false
+  #AuthorizedRequestFilter: 
+  #  pre: 
+  #    disable: false
+#前缀
+  prefix: /citydo-proxy
+  ignored-services:
+  #忽略microcloud-provider-company
+    "*"
+  routes: 
+#添加修改名称将microcloud-provider-company修改为company-proxy
+    microcloud-provider-company: /company-proxy/** 
+    microcloud-provider-dept: /dept-proxy/** 
+    #mycompany逻辑名称将path与ServiceId绑定一起
+    #mycompany.path: /company-proxy/**
+    #mycompany.serviceId: microcloud-provider-company
+    #mycompany.url: http://company-8101:8101/company  http://gateway-9501:9501/company-proxy/get/hello访问
+#安全访问
+security:
+  basic:
+    enabled: true
+  user:
+    name: zdmin
+    password: citydojava
+
+
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    service-url:
+      defaultZone: http://edmin:citydojava@eureka-7001:7001/eureka,http://edmin:citydojava@eureka-7002:7002/eureka,http://edmin:citydojava@eureka-7003:7003/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
+    instance-id: gateway-9501  # 在信息列表时显示主机名称
+    prefer-ip-address: true     # 访问的路径变为IP地址
+
+info:
+  app.name: citydo-microcloud
+  company.name: www.citydo.cn
+  build.artifactId: $project.artifactId$
+  build.version: $project.verson$
+
+spring:
+  application:
+    name: microcloud-zuul-gateway

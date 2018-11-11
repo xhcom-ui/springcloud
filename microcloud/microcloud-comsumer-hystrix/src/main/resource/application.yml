@@ -1,0 +1,23 @@
+server:
+  port: 80
+
+logging:
+  level:
+    com.citydo.service: DEBUG
+
+feign:
+  hystrix: 
+    enabled: true   #由于版本差异必须要配置 以上版本不用配置
+  compression:
+    request:
+      mime-types:       # 可以被压缩的类型
+      - text/xml
+      - application/xml
+      - application/json
+      min-request-size: 2048 # 超过2048的字节进行压缩
+
+eureka: 
+  client: 
+    register-with-eureka: false
+    service-url: 
+      defaultZone: http://edmin:citydojava@eureka-7001:7001/eureka,http://edmin:citydojava@eureka-7002:7002/eureka,http://edmin:citydojava@eureka-7003:7003/eureka

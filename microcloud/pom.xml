@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.citydo</groupId>
+  <artifactId>microcloud</artifactId>
+  <version>0.0.1</version>
+  <packaging>pom</packaging>
+  <name>microcloud</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+  <jdk.version>1.8</jdk.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+   
+
+	<dependencyManagement>
+		<dependencies>
+		
+		    <dependency>
+				<groupId>com.citydo</groupId>
+				<artifactId>microcloud-api</artifactId>
+				<version>0.0.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.citydo</groupId>
+				<artifactId>microcloud-service</artifactId>
+				<version>0.0.1</version>
+			</dependency>
+			
+			<dependency>
+				 <groupId>com.citydo</groupId>
+				<artifactId>microcloud-security</artifactId>
+				<version>0.0.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.0.31</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>1.3.0</version>
+			</dependency>
+			<dependency>
+			<!--进行SpringCloud依赖包的导入处理-->
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.SR1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+					<!--SpringCloud离不开SpringBoot，所以必须要配置此依赖包-->
+					<groupId>org.springframework.boot</groupId>
+				    <artifactId>spring-boot-dependencies</artifactId>
+					<version>1.5.4.RELEASE</version>
+					<type>pom</type>
+					<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+  <build>
+     <finalName>microcloud</finalName>
+     <resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+	</resources>
+     <plugins>
+        <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<delimiters>
+						<delimiter>$</delimiter>
+					</delimiters>
+				</configuration>
+	   </plugin>
+       <plugin>
+         <groupId>org.apache.maven.plugin</groupId>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <version>3.3.9</version>
+         <configuration>
+            <source>${jdk.version}</source>
+            <target>${jdk.version}</target>
+            <encode>${project.build.sourceEncoding</encode>
+         </configuration>
+       </plugin>
+     </plugins>
+  </build>
+  <modules>
+  	<module>microcloud-provide-dept-8001</module>
+    <module>microcloud-api</module>
+    <module>microcloud-comsumer-80</module>
+    <module>microcloud-security</module>
+    <module>microcloud-eureka-7001</module>
+    <module>microcloud-eureka-7002</module>
+    <module>microcloud-eureka-7003</module>
+    <module>microcloud-eureka-server</module>
+    <module>microcloud-provide-dept-8002</module>
+    <module>microcloud-provide-dept-8003</module>
+    <module>microcloud-comsumer-ribbon</module>
+    <module>microcloud-comsumer-feign</module>
+    <module>microcloud-service</module>
+    <module>microcloud-provide-hystrix-8001</module>
+    <module>microcloud-comsumer-hystrix</module>
+    <module>microcloud-consumer-hystrix-dashboard</module>
+    <module>microcloud-consumer-turbine</module>
+    <module>microcloud-provider-company-8101</module>
+    <module>microcloud-zuul-gateway-9501</module>
+    <module>microcloud-provider-upload-8201</module>
+    <module>microcloud-consumer-upload</module>
+  </modules>
+</project>
